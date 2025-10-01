@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Composer_js</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+
+<body class="flex-column">
+    <br><br><br>
+    <div>
+        <h1 id="title">Hello world</h1>
+    </div>
+    <br>
+    <div>
+        <p>Soma</p>
+        <p id="add"></p>
+    </div>
+    <br>
+    <div>
+        <p>Subtração</p>
+        <p id="subtract"></p>
+    </div>
+    <br>
+    <div>
+        <p>Multiplicação</p>
+        <p id="multiply"></p>
+    </div>
+    <br>
+    <div>
+        <p>Divisão</p>
+        <p id="divide"></p>
+    </div>
+
+    <script type="module" src="../vendor_js/autoload.js"></script>
+    <script type="module">
+
+        //chama modulo unico
+        import { use } from "../vendor_js/autoload.js";
+        const utilTitle = await use("Util.title");
+
+        // chama a função
+        const { title } = utilTitle;
+        document.getElementById("title").innerHTML = title();
+
+        // varios modulos com base no namespace do diretorio
+        import { useNamespace } from "../vendor_js/autoload.js";
+
+        //chama a funcão com a constante util."nome da função"
+        const util = await useNamespace('Util');
+        document.getElementById("add").innerHTML = "A soma de 1 + 2 = " + util.add(1, 2);
+        document.getElementById("subtract").innerHTML = "A subtração de 3 - 2 = " + util.subtract(3, 2);
+        document.getElementById("multiply").innerHTML = "A multiplicação de 5 + 2 = " + util.multiply(5, 2);
+        document.getElementById("divide").innerHTML = "A divisão de 4 + 2 = " + util.divide(4, 2);
+    </script>
+
+</body>
+
+</html>
